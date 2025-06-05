@@ -1,3 +1,91 @@
 <resources>
     <string name="app_name">metropolitan</string>
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_map">Map Search</string>
+    <string name="nav_search">Text Search</string>
+    <string name="nav_credits">Credits</string>
+
+    <!-- Home Screen -->
+    <string name="welcome_title">Welcome to the Metropolitan Museum</string>
+    <string name="welcome_message">Explore the magnificent collection of the Metropolitan Museum of Art in New York. Discover artworks from around the world and dive into the rich cultural heritage preserved in this iconic institution.</string>
+
+    <!-- Map Screen -->
+    <string name="map_title">European Art on Map</string>
+    <string name="map_description">Tap on the capitals to discover European paintings from the Metropolitan Museum collection</string>
+    <string name="artworks_from">Artworks from %1$s</string>
+    <string name="total_artworks">Total artworks: %1$d</string>
+    <string name="artist">Artist</string>
+    <string name="title_artwork">Title</string>
+    <string name="view_details">View Details</string>
+    <string name="no_artworks_found">No artworks found for this country</string>
+
+    <!-- Search Screen -->
+    <string name="search_title">Search Artworks</string>
+    <string name="search_hint">Enter search terms...</string>
+    <string name="department_filter">Filter by Department</string>
+    <string name="select_department">Select Department</string>
+    <string name="all_departments">All Departments</string>
+    <string name="search_button">Search</string>
+    <string name="clear_search">Clear</string>
+    <string name="search_results">Search Results</string>
+    <string name="no_results_found">No results found</string>
+    <string name="search_error">Error performing search</string>
+    <string name="try_different_search">Try a different search</string>
+
+    <!-- Artwork Details -->
+    <string name="artwork_details">Artwork Details</string>
+    <string name="artist_nationality">Nationality</string>
+    <string name="artwork_date">Date</string>
+    <string name="artwork_medium">Medium</string>
+    <string name="artwork_dimensions">Dimensions</string>
+    <string name="artwork_credit">Credit Line</string>
+    <string name="artwork_classification">Classification</string>
+    <string name="artwork_repository">Repository</string>
+    <string name="open_original">Open Original Page</string>
+    <string name="unknown_value">-</string>
+
+    <!-- Credits Screen -->
+    <string name="credits_title">Credits</string>
+    <string name="developer_name">Developed by: Mamadou</string>
+    <string name="museum_link_text">Visit the Metropolitan Museum</string>
+    <string name="museum_url">https://www.metmuseum.org/</string>
+    <string name="app_description">This application uses the open API of the Metropolitan Museum of Art to explore their vast collection of artworks.</string>
+    <string name="video_title">Metropolitan Museum Video</string>
+
+    <!-- General -->
+    <string name="loading">Loading...</string>
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+
+    <!-- Connectivity -->
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="check_connection">Please check your internet connection and try again</string>
+    <string name="connection_restored">Connection restored</string>
+
+    <!-- Content Descriptions for Accessibility -->
+    <string name="cd_museum_logo">Metropolitan Museum Logo</string>
+    <string name="cd_artwork_image">Artwork image</string>
+    <string name="cd_map_marker">Map marker for %1$s</string>
+    <string name="cd_loading_animation">Loading animation</string>
+    <string name="cd_error_animation">Error animation</string>
+    <string name="cd_no_results_animation">No results animation</string>
+
+    <!-- Dialog and Alerts -->
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Video Controls -->
+    <string name="play_video">Play</string>
+    <string name="pause_video">Pause</string>
+    <string name="video_loading">Loading video...</string>
+    <string name="video_error">Error playing video</string>
+
+    <!-- Multimedia -->
+    <string name="image_load_error">Error loading image</string>
+    <string name="network_error">Network error</string>
+    <string name="connection_timeout">Connection timeout</string>
+    <string name="no_data_available">No data available</string>
 </resources>

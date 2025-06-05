@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "643955084716",
+    "project_id": "metropolitan-b259a",
+    "storage_bucket": "metropolitan-b259a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643955084716:android:95a2218063bbaf18663e09",
+        "android_client_info": {
+          "package_name": "cat.dam.mamadou.metropolitan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGTDlyb-eJqwSb2IXCLcN6bnWZ44QgSd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
