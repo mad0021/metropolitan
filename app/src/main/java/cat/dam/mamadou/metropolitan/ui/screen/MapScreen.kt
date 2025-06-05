@@ -1,5 +1,6 @@
 package cat.dam.mamadou.metropolitan.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -39,16 +40,16 @@ import cat.dam.mamadou.metropolitan.ui.components.ErrorLottieAnimation
 import cat.dam.mamadou.metropolitan.ui.components.LoadingLottieAnimation
 import cat.dam.mamadou.metropolitan.ui.components.NoResultsLottieAnimation
 import cat.dam.mamadou.metropolitan.ui.viewmodel.MapViewModel
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import cat.dam.mamadou.metropolitan.utils.RequestLocationPermissions
 import cat.dam.mamadou.metropolitan.utils.PermissionUtils
+import cat.dam.mamadou.metropolitan.map.createCustomMarkerBitmapDescriptor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreen(
     isConnected: Boolean,
     onArtworkClick: (Int) -> Unit,
-    viewModel: MapViewModel = viewModel()
+    viewModel: MapViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
@@ -92,7 +93,8 @@ fun MapScreen(
             else -> {
                 MapContent(
                     isTablet = isTablet,
-                    onCapitalSelected = viewModel::onCapitalSelected
+                    onCapitalSelected = viewModel::onCapitalSelected,
+                    context = context
                 )
             }
         }
@@ -134,37 +136,71 @@ fun MapScreen(
 @Composable
 fun MapContent(
     isTablet: Boolean,
-    onCapitalSelected: (EuropeanCapital) -> Unit
+    onCapitalSelected: (EuropeanCapital) -> Unit,
+    context: Context
 ) {
     val europeCenter = LatLng(54.5260, 15.2551)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(europeCenter, if (isTablet) 5f else 4f)
     }
 
-    GoogleMap(
-        modifier = Modifier.fillMaxSize(),
-        cameraPositionState = cameraPositionState,
-        properties = MapProperties(
-            mapType = MapType.NORMAL
-        ),
-        uiSettings = MapUiSettings(
-            zoomControlsEnabled = true,
-            compassEnabled = true
-        )
-    ) {
-        EuropeanCapital.capitals.forEach { capital ->
-            Marker(
-                state = MarkerState(
-                    position = LatLng(capital.latitude, capital.longitude)
-                ),
-                title = capital.capital,
-                snippet = capital.country,
-                icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED),
-                onClick = {
-                    onCapitalSelected(capital)
-                    true
-                }
+    // Variable para el capital seleccionado
+    var selectedMarkerInfo by remember { mutableStateOf<Pair<String, String>?>(null) }
+
+    Box(modifier = Modifier.fillMaxSize()) {  // Box añadido para contener el mapa y la tarjeta
+        GoogleMap(
+            modifier = Modifier.fillMaxSize(),
+            cameraPositionState = cameraPositionState,
+            properties = MapProperties(
+                mapType = MapType.NORMAL
+            ),
+            uiSettings = MapUiSettings(
+                zoomControlsEnabled = true,
+                compassEnabled = true
             )
+        ) {
+            EuropeanCapital.capitals.forEach { capital ->
+                Marker(
+                    state = MarkerState(
+                        position = LatLng(capital.latitude, capital.longitude)
+                    ),
+                    title = capital.capital,
+                    snippet = capital.country,
+                    icon = createCustomMarkerBitmapDescriptor(context, capital.capital),
+                    onClick = {
+                        // Actualizar la información del marcador seleccionado
+                        selectedMarkerInfo = Pair(capital.country, capital.capital)
+                        onCapitalSelected(capital)
+                        true
+                    }
+                )
+            }
+        }
+
+        // Mostrar la información del país i capital seleccionats
+        selectedMarkerInfo?.let { (country, capital) ->
+            Card(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.BottomCenter),  // Ahora esto está dentro de un Box
+                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = capital,
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                    Text(
+                        text = country,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+            }
         }
     }
 }

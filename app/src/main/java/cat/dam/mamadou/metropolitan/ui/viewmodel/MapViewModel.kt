@@ -10,11 +10,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+// Temporalmente eliminamos la anotación @HiltViewModel y añadimos un constructor sin parámetros
 class MapViewModel : ViewModel() {
-
-    private val repository = MetropolitanRepository()
-
+    // Referencia temporal al repositorio sin inyección
+    private val repository: MetropolitanRepository by lazy { 
+        MetropolitanRepository() // Asumiendo que tiene un constructor sin parámetros
+    }
+    
     private val _selectedCapital = MutableStateFlow<EuropeanCapital?>(null)
     val selectedCapital: StateFlow<EuropeanCapital?> = _selectedCapital.asStateFlow()
 
@@ -32,7 +36,6 @@ class MapViewModel : ViewModel() {
 
     fun hideBottomSheet() {
         _isBottomSheetVisible.value = false
-        _selectedCapital.value = null
     }
 
     private fun loadArtworksForCountry(country: String) {
